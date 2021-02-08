@@ -1,0 +1,227 @@
+﻿#include <stdio.h>
+#include <stdlib.h>
+
+//Coelhinho da páscoa, o que trazes pra mim? Um Calendario em que voce entra com o ano e ele é impresso a partir da data da pascoa
+//Calculos são realizados para descobrir que dia cai a data do ano de entrada e apartir dessa data 
+
+int main() {
+	
+	int y, g , c, x, z, e, n, d, var, mes, ano, bissexto = 0, dia = 1, matriz[6][7], i=1, lin ,col;
+	
+	//Número Áureo (G): dado pelo resto da divisão inteira de Y por 19 acrescido de 1;
+	
+	scanf("%d", &y );
+		g = (y%19)+1;
+		
+	//Século (C): quociente da divisão inteira de Y por 100 acrescido de 1;
+	
+	c = (y/100)+1;
+		
+	//Fator de Correção 1 (X): quociente da divisão de 3C por 4, menos 12;
+	
+	x = ((3*c)/4)-12;
+	
+	//Fator de Correção 2 (Z): quociente da divisão de (8C + 5) por 25, menos 5;
+	
+	z = ((8*c + 5)/ 25)-5;
+	
+	//Epacta (E): resto da divisão inteira de (11G + 20 + Z - X) por 30;
+	
+	e = (11*g + 20 + z - x)%30;
+	
+	//Se (E = 25) e (G > 11), ou se (E = 24), então some 1 a E;
+	
+	if((e == 25 && g>11) || (e == 24) ){
+		e++;	
+	}
+			
+	//Lua Cheia (N): faça N = 44 - E. Se N < 21, então faça N receber N + 30;
+	
+	n = 44 - e;
+	
+	if(n < 21){
+		n + 30;
+	}
+	//Domingo de Páscoa (D): quociente da divisão inteira de 5Y por 4, menos (X + 10);
+	
+	d = ((5*y)/4)-(x+10);
+	
+	//Dia e mês da Páscoa: Faça N receber (N + 7) menos o resto da divisão de (D + N) por 7. Se N > 31, a Páscoa será no dia (N - 31) de abril, caso contrário será em N de março.
+	
+	var = ((d+n)%7);
+		n = (n+7) - var;
+	
+	if(n>31){
+		n =	n-31;
+		mes = 4;
+	}
+	else
+		mes = 3;	
+		ano = y;
+	
+	//ii) 	Se o resto da divisão de ANO por 100 for 0, faça ANO = ANO / 100;
+	
+	if(ano%100 == 0){
+		ano = ano / 100;
+	}
+	if(ano%4 == 0){
+		bissexto = 1;
+	}
+	while( mes > 0)
+	{
+		while(n > 0)
+		{
+			n--;
+			if(n > 0)
+			dia--;
+			if(dia == 0){
+				dia = 7;	
+					}
+	}
+		mes--;
+		dia--;
+	if(dia == 0){
+		dia = 7;	
+	}	
+
+	if(mes == 2){
+		n=28 ;
+			if(bissexto == 1)
+				n = 29;
+	}
+	
+	if(mes == 1 )
+	 	n=31;
+			if(mes == 3)
+				n=31;
+					if(mes == 4)
+						n=30;
+							if(mes == 5)
+								n=31;
+									if(mes == 6)
+										n=30;		
+											if(mes == 7)
+												n=31;
+		 											if(mes == 8)
+		 												n=31;
+		 													if(mes == 9)
+													 			n=30;
+													 				if(mes == 10)
+													 					n=31;
+													 						if(mes == 11 )
+													 							n=30;
+													 								if(mes == 12)
+													 									n=31;
+	}
+		 	
+				
+	
+	for(lin=0;lin < 6; lin++){
+				for(col=0;col < 7; col++){
+					matriz[lin][col] = i;
+					i++;
+				}
+	}	
+	printf("Calendario do ano %d\n",y);
+	printf("|-----------------------------|");			
+	for(mes = 1; mes < 13; mes ++){
+		if(mes == 1 ){
+		printf("\n|Janeiro                      |\n|-----------------------------|\n| dom seg ter qua qui sex sab |\n|");
+	    }
+		if(mes ==2 ){
+		printf("\n|Fevereiro                    |\n|-----------------------------|\n| dom seg ter qua qui sex sab |\n|");
+	    }
+		if(mes ==3 ){
+		printf("\n|Março                        |\n|-----------------------------|\n| dom seg ter qua qui sex sab |\n|");
+	    }
+		if(mes ==4 ){
+		printf("\n|Abril                        |\n|-----------------------------|\n| dom seg ter qua qui sex sab |\n|");
+	    }
+		if(mes ==5 ){
+		printf("\n|Maio                         |\n|-----------------------------|\n| dom seg ter qua qui sex sab |\n|");
+	    }
+		if(mes ==6 ){
+		printf("\n|Junho                        |\n|-----------------------------|\n| dom seg ter qua qui sex sab |\n|");
+	    }
+		if(mes ==7 ){
+		printf("\n|Julho                        |\n|-----------------------------|\n| dom seg ter qua qui sex sab |\n|");
+	    }
+		if(mes ==8 ){
+		printf("\n|Agosto                       |\n|-----------------------------|\n| dom seg ter qua qui sex sab |\n|");
+	    }
+		if(mes ==9 ){
+		printf("\n|Setembro                     |\n|-----------------------------|\n| dom seg ter qua qui sex sab |\n|");
+	    }
+		if(mes ==10 ){
+		printf("\n|Outubro                      |\n|-----------------------------|\n| dom seg ter qua qui sex sab |\n|");
+	    }
+		if(mes ==11 ){
+		printf("\n|Novembro                     |\n|-----------------------------|\n| dom seg ter qua qui sex sab |\n|");
+	    }
+		if(mes ==12 ){
+		printf("\n|Dezembro                     |\n|-----------------------------|\n| dom seg ter qua qui sex sab |\n|");
+	    }
+
+	if(mes == 2){
+		n=28 ;
+			if(bissexto == 1)
+				n = 29;
+	}
+	
+	if(mes == 1 )
+	 	n=31;
+			if(mes == 3)
+				n=31;
+					if(mes == 4)
+						n=30;
+							if(mes == 5)
+								n=31;
+									if(mes == 6)
+										n=30;		
+											if(mes == 7)
+												n=31;
+		 											if(mes == 8)
+		 												n=31;
+		 													if(mes == 9)
+													 			n=30;
+													 				if(mes == 10)
+													 					n=31;
+													 						if(mes == 11 )
+													 							n=30;
+													 								if(mes == 12)
+													 									n=31;
+
+	 	
+	 	i=1;
+		for(lin=0;lin < 6; lin++){
+			for(col=0;col < 7; col++){
+				if(lin==0 && col < dia && dia !=7 ){
+					
+				printf("  --");
+				}
+				else
+				if(i <= n){
+				printf("  %.2d", i);
+				i++;
+				dia++;
+					if(dia >7){
+						dia=1;
+					}
+				}
+				else
+					printf("  --");
+				if(col==6 && lin !=5){
+				printf(" |\n|");
+				}
+				else
+				if(col==6 && lin == 5)
+					printf(" |\n|-----------------------------|");
+					
+			}
+		}
+		
+			
+	}
+	
+	return 0;
+}
